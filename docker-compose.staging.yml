@@ -3,9 +3,11 @@ version: '3'
 
 services:
   web:
-    build: .
+    image: ahmadum01/orto-tezzi-back
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             gunicorn --bind :8000 --workers 5 configs.wsgi:application --access-logfile - --error-logfile - "
     ports:
       - "8000:8000"
     depends_on:
@@ -13,20 +15,12 @@ services:
     volumes:
       - .:/code
     environment:
-      - DEBUG=True
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - .env
 
   db:
     image: postgres:15-alpine
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-      - POSTGRES_HOST_AUTH_METHOD=trust
+    env_file:
+      - .env
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
