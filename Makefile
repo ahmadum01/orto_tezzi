@@ -1,4 +1,4 @@
-local_up:
+build_and_up:
 	docker-compose build --parallel
 	docker-compose up --attach web --attach db
 
