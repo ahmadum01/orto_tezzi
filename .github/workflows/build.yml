@@ -31,7 +31,7 @@ jobs:
         with:
           host: 46.149.73.62
           username: orto_tezzi
-          key: ${{ secrets.SERVER_SSH_PROD_PRIVATE_KEY }}
+          key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           source: ".env,docker-compose.staging.yml"
           target: "~/orto_tezzi_back"
 
