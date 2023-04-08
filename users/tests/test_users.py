@@ -7,3 +7,4 @@ from ..models import User
 def test_user_create():
     factories.UserFactory()
     assert User.objects.count() == 1
+
