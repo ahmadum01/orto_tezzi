@@ -1,6 +1,11 @@
 name: Lint-test
 
 on:
+  push:
+    branches:
+      - main
+      - staging
+
   pull_request:
     branches:
       - main
