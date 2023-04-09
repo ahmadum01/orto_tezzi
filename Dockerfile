@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10-alpine3.17
 
 LABEL authors="ahmad"
 
@@ -6,10 +6,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
-
-RUN apt-get update \
-    && apt-get install make \
-    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install "poetry==1.2.2"
 
