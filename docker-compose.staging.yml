@@ -3,7 +3,8 @@ version: '3'
 
 services:
   web:
-    image: ahmadum01/orto-tezzi-back
+    build: .
+    image: ahmadum01/orto-tezzi-backend
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
