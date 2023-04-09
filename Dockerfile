@@ -11,6 +11,10 @@ RUN pip install "poetry==1.2.2"
 
 COPY pyproject.toml poetry.lock /code/
 
+RUN apt-get update \
+    && apt-get install make \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN poetry config experimental.new-installer true \
     && poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
