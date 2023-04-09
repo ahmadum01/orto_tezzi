@@ -1,6 +1,7 @@
 import pytest
-from . import factories
+
 from ..models import User
+from . import factories
 
 
 @pytest.mark.django_db

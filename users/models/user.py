@@ -15,7 +15,6 @@ class UserManagerQuery(CoreUserManager.from_queryset(UserQuerySet)):
 
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_field):
-
         if not username:
             raise ValueError("User must have an username.")
         user = self.model(username=username, **extra_field)
