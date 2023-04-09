@@ -52,7 +52,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ahmadum01/orto_tezzi_back:latest
+          tags: ahmadum01/orto_tezzi_backend:latest
 
       - name: Trigger container update
         uses: appleboy/ssh-action@master
