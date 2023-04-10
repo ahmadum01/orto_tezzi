@@ -21,7 +21,7 @@ local_shell:
 	docker-compose exec web sh
 
 test:
-	docker-compose run --rm web sh -c "pytest"
+	pytest
 
 local_django_shell:
 	docker-compose  -f docker-compose.local.yml exec web python manage.py shell
