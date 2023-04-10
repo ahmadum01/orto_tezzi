@@ -38,7 +38,6 @@ class User(AbstractUser):
         MinLengthValidator(4),
         MaxLengthValidator(30),
     ]
-    firebase_uid = models.CharField(max_length=64, unique=True, null=True, blank=True)
     username = models.CharField(
         _("username"),
         max_length=20,

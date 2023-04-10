@@ -1,3 +1,8 @@
-from django.contrib import admin  # noqa
+from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+@admin.register(models.User)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ["username", "id"]
