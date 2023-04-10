@@ -29,6 +29,15 @@ jobs:
           envkey_POSTGRES_PORT: 5432
           envkey_POSTGRES_USER: "postgres"
 
+      - name: Build Backend
+        id: docker_build_backend
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ahmadum01/orto_tezzi_backend:latest
+
       - name: Lint
         run: docker-compose -f docker-compose.staging.yml run --rm web sh -c "make lint"
 

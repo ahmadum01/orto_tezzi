@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-RUN apk add --update make
+RUN apk add --update make  && apk add --update git
 
 RUN pip install "poetry==1.2.2"
 
