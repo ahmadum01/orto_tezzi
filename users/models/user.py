@@ -4,6 +4,8 @@ from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from carts.services import CartCreator
+
 
 class UserQuerySet(models.QuerySet):
     pass
@@ -20,7 +22,7 @@ class UserManager(BaseUserManager):
         user = self.model(username=username, **extra_field)
         user.set_password(password)
         user.save(using=self._db)
-
+        CartCreator(user).execute()
         return user
 
     def create_superuser(self, username, password, **extra_field):

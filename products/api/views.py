@@ -3,6 +3,7 @@ from rest_framework.viewsets import GenericViewSet
 
 from .. import models
 from . import serializers
+from . import filters
 
 
 class ProductViewSet(
@@ -12,3 +13,4 @@ class ProductViewSet(
 ):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
+    filterset_class = filters.ProductsFilter

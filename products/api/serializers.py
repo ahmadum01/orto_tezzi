@@ -12,6 +12,21 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
-        fields = "__all__"
+        read_only_fields = ('id',)
+        fields = (
+            *read_only_fields,
+            'name',
+            'description',
+            'image',
+            'price',
+            'sizes',
+            'gender',
+            'product_type',
+        )
 
-    product_type = serializers.CharField(source="product_type.name")
+    sizes = serializers.SerializerMethodField()
+
+    def get_sizes(self, product: models.Product) -> list[int]:
+        return [size.size for size in product.sizes.all()]
+
+    product_type = serializers.CharField(source="product_type.name", required=False)
