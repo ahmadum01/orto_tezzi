@@ -12,16 +12,16 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
-        read_only_fields = ('id',)
+        read_only_fields = ("id",)
         fields = (
             *read_only_fields,
-            'name',
-            'description',
-            'image',
-            'price',
-            'sizes',
-            'gender',
-            'product_type',
+            "name",
+            "description",
+            "image",
+            "price",
+            "sizes",
+            "gender",
+            "product_type",
         )
 
     sizes = serializers.SerializerMethodField()

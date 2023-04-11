@@ -2,8 +2,7 @@ from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet
 
 from .. import models
-from . import serializers
-from . import filters
+from . import filters, serializers
 
 
 class ProductViewSet(

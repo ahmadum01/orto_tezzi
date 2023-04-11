@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+
 from ..models import Cart
+
 
 @dataclass
 class CartCreator:

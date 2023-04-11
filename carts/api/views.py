@@ -1,11 +1,10 @@
 from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.viewsets import mixins, GenericViewSet
-from .. import models
-from . import serializers
 from rest_framework.permissions import IsAuthenticated
-from .. import services
-from ..models import Cart
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet, mixins
+
+from .. import models, services
+from . import serializers
 
 
 class PurchaseViewSet(
@@ -13,7 +12,7 @@ class PurchaseViewSet(
     mixins.CreateModelMixin,
     mixins.DestroyModelMixin,
     mixins.UpdateModelMixin,
-    GenericViewSet
+    GenericViewSet,
 ):
     queryset = models.Purchase.objects.all()
     serializer_class = serializers.PurchaseSerializer
@@ -26,8 +25,9 @@ class PurchaseViewSet(
         headers = self.get_success_headers(serializer.data)
 
         services.PurchaseToCartAdder(
-            purchase_id=serializer.data['id'],
+            purchase_id=serializer.data["id"],
             user=request.user,
         ).execute()
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )

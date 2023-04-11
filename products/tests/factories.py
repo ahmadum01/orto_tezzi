@@ -7,7 +7,9 @@ from .. import models
 class ProductFactory(DjangoModelFactory):
     class Meta:
         model = models.Product
+
     price = factory.fuzzy.FuzzyInteger(1, 10)
+
 
 class ProductTypeFactory(DjangoModelFactory):
     class Meta:
@@ -17,4 +19,5 @@ class ProductTypeFactory(DjangoModelFactory):
 class ProductSizeFactory(DjangoModelFactory):
     class Meta:
         model = models.ProductSize
+
     size = 15

@@ -9,9 +9,9 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+from carts.api.routers import urls as cart_urls
 from products.api.routers import urls as product_urls
 from users.api.routers import urls as user_urls
-from carts.api.routers import urls as cart_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
