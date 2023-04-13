@@ -1,3 +1,14 @@
-from django.contrib import admin  # noqa
+from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+@admin.register(models.Purchase)
+class PurchaseAdmin(admin.ModelAdmin):
+    list_display = ["product", "cart"]
+
+
+@admin.register(models.Cart)
+class CartAdmin(admin.ModelAdmin):
+    # list_display = ["product", "cart"]
+    pass

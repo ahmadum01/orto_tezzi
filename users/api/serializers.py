@@ -13,6 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
             "phone_number",
         )
 
+    password = serializers.CharField(max_length=255, write_only=True)
+
     def create(self, validated_data):
         """Create and return a user with encrypted password"""
         return models.User.objects.create_user(**validated_data)
