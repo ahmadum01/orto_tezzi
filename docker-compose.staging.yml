@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
     volumes:
-      - media-data:/code/media/
+      - media-data:/code/uploads/
     environment:
       - .env
 
