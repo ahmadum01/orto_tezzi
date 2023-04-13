@@ -5,6 +5,7 @@ from . import factories
 
 @pytest.mark.django_db
 def test_product_list(logged_client):
+    """Test"""
     for _ in range(10):
         product = factories.ProductFactory(price=10)
         product.sizes.add(factories.ProductSizeFactory())
