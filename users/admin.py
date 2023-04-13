@@ -4,5 +4,6 @@ from . import models
 
 
 @admin.register(models.User)
-class ProductAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     list_display = ["username", "id"]
+    readonly_fields = ("password",)
