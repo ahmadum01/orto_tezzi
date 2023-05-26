@@ -7,7 +7,7 @@ services:
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
-             gunicorn --bind :8000 --workers 5 configs.wsgi:application --access-logfile - --error-logfile - "
+             python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
@@ -17,28 +17,15 @@ services:
     environment:
       - .env
 
-
   db:
     image: postgres:15-alpine
+    restart: unless-stopped
     env_file:
       - .env
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
-  pgadmin:
-    image: dpage/pgadmin4
-    depends_on:
-      - db
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=123
-    ports:
-      - "5050:80"
-    logging:
-      driver: none
-
 
 volumes:
   db-data:
