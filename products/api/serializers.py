@@ -6,7 +6,7 @@ from .. import models
 class ProductTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ProductType
-        fields = ("name",)
+        fields = ("id", "name")
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -22,6 +22,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "sizes",
             "gender",
             "product_type",
+            "created_at",
         )
 
     sizes = serializers.SerializerMethodField()

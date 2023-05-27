@@ -7,8 +7,5 @@ class ProductsFilter(filtersets.FilterSet):
     )
     ordering = filtersets.OrderingFilter(
         # tuple-mapping retains order
-        fields=(
-            ("price", "price"),
-            ("name", "name"),
-        ),
+        fields=(("price", "price"), ("name", "name"), ("created_at", "created_at")),
     )

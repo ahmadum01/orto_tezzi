@@ -5,5 +5,6 @@ from . import views
 router = DefaultRouter()
 
 router.register("product", views.ProductViewSet, "product")
+router.register("product-type", views.ProductTypeViewSet, "product-type")
 
 urls = router.urls

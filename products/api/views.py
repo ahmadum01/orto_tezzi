@@ -13,3 +13,18 @@ class ProductViewSet(
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
     filterset_class = filters.ProductsFilter
+
+    # @action(
+    #     methods=('GET',),
+    #     detail=False,
+    # )
+    # def product_type(self):
+    #     return Response(data={"tags": })
+
+
+class ProductTypeViewSet(
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
+    queryset = models.ProductType.objects.all()
+    serializer_class = serializers.ProductTypeSerializer

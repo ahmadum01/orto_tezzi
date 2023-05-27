@@ -14,7 +14,7 @@ def test_purchase_list(user, logged_client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["count"] == 10
+    assert len(data) == 10
 
 
 @pytest.mark.django_db

@@ -12,7 +12,7 @@ def test_product_list(logged_client):
     response = logged_client.get("/product/")
     assert response.status_code == 200
     data = response.json()
-    assert data["count"] == 10
+    assert len(data) == 10
 
 
 @pytest.mark.django_db
@@ -27,8 +27,8 @@ def test_product_filter_by_product_type(logged_client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["count"] == 5
-    assert data["results"][0]["product_type"] == "pants"
+    assert len(data) == 5
+    assert data[0]["product_type"] == "pants"
 
 
 @pytest.mark.django_db
@@ -41,9 +41,9 @@ def test_product_ordering_by_price_asc(logged_client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["count"] == 5
+    assert len(data) == 5
 
-    res_prices = [product["price"] for product in data["results"]]
+    res_prices = [product["price"] for product in data]
     assert res_prices == sorted(prices)
 
 
@@ -57,9 +57,9 @@ def test_product_ordering_by_price_desc(logged_client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["count"] == 5
+    assert len(data) == 5
 
-    res_prices = [product["price"] for product in data["results"]]
+    res_prices = [product["price"] for product in data]
     assert res_prices == sorted(prices, reverse=True)
 
 
@@ -73,9 +73,9 @@ def test_product_ordering_by_name_asc(logged_client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["count"] == 5
+    assert len(data) == 5
 
-    res_names = [product["name"] for product in data["results"]]
+    res_names = [product["name"] for product in data]
     assert res_names == sorted(names)
 
 
@@ -89,7 +89,7 @@ def test_product_ordering_by_name_desc(logged_client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["count"] == 5
+    assert len(data) == 5
 
-    res_names = [product["name"] for product in data["results"]]
+    res_names = [product["name"] for product in data]
     assert res_names == sorted(names, reverse=True)
