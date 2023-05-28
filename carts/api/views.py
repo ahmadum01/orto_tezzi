@@ -41,12 +41,10 @@ class PurchaseViewSet(
 
     @extend_schema(
         responses=inline_serializer(
-            name="BrandMediaFilterSerializer",
+            name="CartStatisticSerializer",
             fields={
-                "review": drf_serializers.IntegerField(),
-                "accepted": drf_serializers.IntegerField(),
-                "favorites": drf_serializers.IntegerField(),
-                "rejected": drf_serializers.IntegerField(),
+                "quantity": drf_serializers.IntegerField(),
+                "price_sum": drf_serializers.IntegerField(),
             },
         ),
     )
