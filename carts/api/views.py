@@ -1,5 +1,5 @@
 import rest_framework.serializers as drf_serializers
-from django.db.models import Sum, F
+from django.db.models import F, Sum
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -24,16 +24,25 @@ class PurchaseViewSet(
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return self.queryset.filter(cart__user=self.request.user)
+        return self.queryset.filter(cart__user=self.request.user, quantity__gt=0)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        # add purchase to card
         user = request.user
-        serializer.validated_data["cart"] = models.Cart.objects.get(user=user)
-
-        self.perform_create(serializer)
+        purchases = self.queryset.filter(
+            cart__user=user,
+            gender=serializer.validated_data["gender"],
+            size=serializer.validated_data["size"],
+        )
+        if purchases.exists():
+            purchase = purchases.first()
+            purchase.quantity = F("quantity") + serializer.validated_data["quantity"]
+            purchase.save(update_fields=["quantity"])
+        else:
+            # add purchase to card
+            serializer.validated_data["cart"] = models.Cart.objects.get(user=user)
+            self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
