@@ -33,7 +33,7 @@ def test_purchase_create(user, logged_client):
     product = ProductFactory(name="Test name")
     product_size = ProductSizeFactory(size=33)
     product.sizes.add(product_size)
-    payload = {"product": product.pk, "size": 33, "quantity": 5}
+    payload = {"product_id": product.pk, "size": 33, "quantity": 5}
     # breakpoint()
     response = logged_client.post("/cart/", data=payload)
     assert response.status_code == 201
@@ -76,7 +76,7 @@ def test_purchase_put(user, logged_client):
     purchase.product.sizes.add(ProductSizeFactory(size=5))
     product_id = purchase.product_id
     payload = {
-        "product": purchase.product_id,
+        "product_id": purchase.product_id,
         "size": 5,
         "quantity": 4,
     }
