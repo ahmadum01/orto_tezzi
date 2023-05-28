@@ -64,7 +64,9 @@ class PurchaseViewSet(
     )
     def cart_statistic(self, request):
         queryset = self.get_queryset()
-        quantity = queryset.count()
+        quantity = queryset.aggregate(common_quantity=Sum("quantity"))[
+            "common_quantity"
+        ]
         price_sum = queryset.aggregate(
             price_sum=Sum(F("product__price") * F("quantity"))
         )["price_sum"]
