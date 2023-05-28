@@ -1,5 +1,5 @@
 import rest_framework.serializers as drf_serializers
-from django.db.models import Sum
+from django.db.models import Sum, F
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -56,9 +56,12 @@ class PurchaseViewSet(
     def cart_statistic(self, request):
         queryset = self.get_queryset()
         quantity = queryset.count()
-        price_sum = queryset.aggregate(Sum("product__price"))["product__price__sum"]
+        price_sum = queryset.aggregate(
+            price_sum=Sum(F("product__price") * F("quantity"))
+        )["price_sum"]
         response = {
             "quantity": quantity,
             "price_sum": price_sum,
         }
+
         return Response(response, status=200)
