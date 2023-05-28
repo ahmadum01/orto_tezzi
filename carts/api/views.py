@@ -76,3 +76,12 @@ class PurchaseViewSet(
         }
 
         return Response(response, status=200)
+
+    @action(
+        methods=("DELETE",),
+        detail=False,
+        permission_classes=[IsAuthenticated],
+    )
+    def clear(self, request):
+        self.get_queryset().delete()
+        return Response({"Success": True}, status=204)
