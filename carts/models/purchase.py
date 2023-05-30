@@ -10,7 +10,7 @@ class Purchase(models.Model):
         ("C", "Common"),
     )
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
-    size = models.PositiveIntegerField(null=True, blank=True)
+    size = models.CharField(max_length=15, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1)
     cart = models.ForeignKey("carts.Cart", on_delete=models.CASCADE)
     gender = models.CharField(

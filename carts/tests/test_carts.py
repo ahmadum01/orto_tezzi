@@ -60,7 +60,7 @@ def test_purchase_patch(user, logged_client):
     response = logged_client.patch(f"/cart/{purchase.pk}/", data=payload)
     assert response.status_code == 200
     purchase.refresh_from_db()
-    assert purchase.size == 10
+    assert purchase.size == "10"
     assert purchase.quantity == 4
     assert purchase.product_id == product_id
     assert Purchase.objects.filter(cart=cart).count() == 1
@@ -85,7 +85,7 @@ def test_purchase_put(user, logged_client):
     response = logged_client.put(f"/cart/{purchase.pk}/", data=payload)
     assert response.status_code == 200
     purchase.refresh_from_db()
-    assert purchase.size == 5
+    assert purchase.size == "5"
     assert purchase.quantity == 4
     assert purchase.product_id == product_id
     assert Purchase.objects.filter(cart=cart).count() == 1
