@@ -61,4 +61,4 @@ jobs:
           username: ahmad
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           script: |
-                  cd ~/orto_tezzi && docker-compose -f docker-compose.staging.yml pull && make build_and_up
+                  cd ~/orto_tezzi && docker compose -f docker-compose.staging.yml pull && make build_and_up
