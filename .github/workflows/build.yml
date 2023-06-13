@@ -30,10 +30,10 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: 46.149.73.62
-          username: orto_tezzi
+          username: ahmad
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           source: ".env,docker-compose.staging.yml"
-          target: "~/orto_tezzi_back"
+          target: "~/orto_tezzi"
 
       - name: Login to Docker Registry
         uses: docker/login-action@v2
@@ -58,7 +58,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 46.149.73.62
-          username: orto_tezzi
+          username: ahmad
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           script: |
-                  cd ~/orto_tezzi_back && docker-compose -f docker-compose.staging.yml pull && make build_and_up
+                  cd ~/orto_tezzi && docker-compose -f docker-compose.staging.yml pull && make build_and_up
