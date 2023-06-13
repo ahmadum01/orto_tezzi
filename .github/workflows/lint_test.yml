@@ -45,7 +45,7 @@ jobs:
           tags: ahmadum01/orto_tezzi_backend:latest
 
       - name: Lint
-        run: docker-compose -f docker-compose.staging.yml run --rm web sh -c "make lint"
+        run: docker compose -f docker-compose.staging.yml run --rm web sh -c "make lint"
 
       - name: Test
-        run: docker-compose -f docker-compose.staging.yml run --rm web sh -c "make test"
+        run: docker compose -f docker-compose.staging.yml run --rm web sh -c "make test"
