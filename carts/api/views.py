@@ -83,5 +83,6 @@ class PurchaseViewSet(
         permission_classes=[IsAuthenticated],
     )
     def clear(self, request):
+        # hello
         self.get_queryset().delete()
         return Response({"Success": True}, status=204)
